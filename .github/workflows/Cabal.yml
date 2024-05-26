@@ -4,11 +4,10 @@ name: Cabal
 on:
   push:
     branches:
-      # - master
-      - ghc-9.10
-  # pull_request:
-  #   branches:
-  #     - master
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
