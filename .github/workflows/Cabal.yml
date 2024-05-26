@@ -34,7 +34,7 @@ jobs:
 
     - name: Configure the build
       run: |
-        cabal configure --enable-tests --enable-benchmarks
+        cabal configure --enable-tests --enable-benchmarks --enable-documentation
         cabal build all --dry-run
       # The last step generates dist-newstyle/cache/plan.json for the cache key.
 
@@ -53,9 +53,6 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: cabal build all --only-dependencies
 
-    - name: Build documentation
-      run: cabal haddock all
-
     # Cache dependencies already here, so that we do not have to rebuild them should the subsequent steps fail.
     - name: Save cached dependencies
       uses: actions/cache/save@v4
@@ -73,3 +70,6 @@ jobs:
 
     - name: Check cabal file
       run: cabal check
+
+    - name: Build documentation
+      run: cabal haddock all
